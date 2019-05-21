@@ -1,0 +1,4 @@
+﻿  Source.cpp
+C:\Users\carl_\OneDrive\#Programs\Client\Source.cpp(28): warning C4101: 'bufferlen': unreferenced local variable
+C:\Users\carl_\OneDrive\#Programs\Client\Source.cpp(28): warning C4101: 'recvbuflen': unreferenced local variable
+  Client.vcxproj -> C:\Users\carl_\OneDrive\#Programs\Client\Debug\Client.exe
