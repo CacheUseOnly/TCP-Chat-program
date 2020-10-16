@@ -33,9 +33,14 @@ int main(int argc, char* argv[]) {
 	printf("Starting server program...\n");
 
 	//Set port, buffer and backlog
-	printf("Binding port: %d...", atoi(argv[1]));
-	if (argc == 2) port = DEFAULT_PORT;
-	else if (strcmp(argv[1], "0") == 0) port = DEFAULT_PORT;
+	if (argc == 1) {
+		printf("Binding port with default setting: 8080...");
+		port = DEFAULT_PORT;
+	}
+	else if (strcmp(argv[1], "0") == 0) {
+		printf("Binding port with default setting: 8080...");
+		port = DEFAULT_PORT;
+	} 
 	else {
 		if (atoi(argv[1]) < 257) {
 			perror("Cannot use system reserved ports.");
@@ -47,20 +52,27 @@ int main(int argc, char* argv[]) {
 	}
 	printf(" Done\n");
 
-	printf("Initializing buffer: %d...", atoi(argv[2]));
-	if (argc < 3) buffersize = DEFAULT_BUFFERSIZE;
-	else if (atoi(argv[2]) == 0) buffersize = DEFAULT_BUFFERSIZE;
-	else buffersize = atoi(argv[2]);
+	if (argc < 3 | atoi(argv[2]) == 0) {
+		printf("Initializing buffer with default setting: 256...");
+		buffersize = DEFAULT_BUFFERSIZE;
+	}
+	else {
+		printf("Initializing buffer: %d...", atoi(argv[2]));
+		buffersize = atoi(argv[2]);
+	}
 	char** buffer = malloc(buffersize * sizeof(char*));
 	printf(" Done\n");
 
-	printf("Setting backlog numbers: %d...", atoi(argv[3]));
-	if (argc < 4) backlog = DEFAULT_BACKLOG;
+	if (argc < 4) {
+		printf("Setting backlog numbers with default setting: %d...");
+		backlog = DEFAULT_BACKLOG;
+	}
 	else {
 		if (atoi(argv[3]) == 0) {
 			perror("Backlog must be greater than 0.");
 			return 0;
 		}
+		printf("Setting backlog numbers: 5...");
 		backlog = atoi(argv[2]);
 	}
 	printf(" Done\n");
