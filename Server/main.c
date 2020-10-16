@@ -1,31 +1,15 @@
-#ifndef _WIN32
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#else
-#include <WinSock2.h>
-#endif // !_WIN32
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+/*
+ * A simple chat program server using system dependent socket
+ * If compling on Windows then use Winsock 
+ */
 
-
-
-#define DEFAULT_PORT 8080
-#define DEFAULT_BUFFERSIZE 256
-#define DEFAULT_BACKLOG 5
+#include "server.h"
 
 int main(int argc, char* argv[]) {
-	/*if (argc > 1 && (strcmp(argv[1],"-help") == 0)) {
-		printf("Usage: server [Port number] [Buffer size] [Backlog number]\n");
-		printf("\t-Port: input 0 to skip this parameter, 20800 by default.\n");
-		printf("\t-Buffer size: input 0 to skip this parameter, 256 by default.\n");
-		printf("\t-Backlog number: 5 by default.\n");
+	if (argc > 1 && (strcmp(argv[1],"-h") == 0)) {
+		printHelp();
 		return 0;
-	}*/
+	}
 
 	int port, buffersize, sockfd/*socket file descriptor*/, newsockfd, backlog;
 	struct sockaddr_in serv_addr, cli_addr;
