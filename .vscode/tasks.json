@@ -2,26 +2,45 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "shell",
-            "label": "C/C++: cl.exe build active file",
-            "command": "cl.exe",
+            "type": "cppbuild",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/gcc",
             "args": [
-                "/Zi",
-                "/EHsc",
-                "/Fe:",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${file}"
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "/usr/bin"
             },
             "problemMatcher": [
-                "$msCompile"
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "compiler: /usr/bin/gcc"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc-7 build active file",
+            "command": "/usr/bin/gcc-7",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
             ],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "detail": "Generated task by Debugger"
         }
     ]
 }
