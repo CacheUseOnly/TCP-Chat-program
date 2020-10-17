@@ -18,21 +18,13 @@ int main(int argc, char* argv[]) {
 
 	//Set port, buffer and backlog
 	if (argc == 1) {
-		printf("Binding port with default setting: 8080...");
-		port = DEFAULT_PORT;
+		setPort(&port, DEFAULT_PORT);
 	}
 	else if (strcmp(argv[1], "0") == 0) {
-		printf("Binding port with default setting: 8080...");
-		port = DEFAULT_PORT;
+		setPort(&port, DEFAULT_PORT);
 	} 
 	else {
-		if (atoi(argv[1]) < 257) {
-			perror("Cannot use system reserved ports.");
-			return 0;
-		}
-		else {
-			port = atoi(argv[1]);
-		}
+		if (setPort(&port, atoi(argv[1])) == -1) return 0;
 	}
 	printf(" Done\n");
 

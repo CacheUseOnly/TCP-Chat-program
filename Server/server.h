@@ -12,11 +12,11 @@
 #include <ctype.h>
 #include <string.h>
 
-#define DEFAULT_PORT 8080
+#define DEFAULT_PORT 20800
 #define DEFAULT_BUFFERSIZE 256
 #define DEFAULT_BACKLOG 5
 
-int bindPort(int port);
+int setPort(int* port, int portNum);
 int initBuffer(int buffSize);
 int setBacklog(int num);
 int openSock();
