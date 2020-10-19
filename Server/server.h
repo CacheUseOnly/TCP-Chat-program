@@ -17,8 +17,8 @@
 #define DEFAULT_BACKLOG 5
 
 int setPort(int* port, int portNum);
-int initBuffer(int buffSize);
-int setBacklog(int num);
+char** initBuffer(int buffSize);
+int setBacklog(int* backlog, int num);
 int openSock();
 int binding();
 int accept();

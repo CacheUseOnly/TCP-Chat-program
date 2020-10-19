@@ -13,6 +13,7 @@ int main(int argc, char* argv[]) {
 
 	int port, buffersize, sockfd/*socket file descriptor*/, newsockfd, backlog;
 	struct sockaddr_in serv_addr, cli_addr;
+	char** buffer;
 
 	printf("Starting server program...\n");
 
@@ -28,28 +29,21 @@ int main(int argc, char* argv[]) {
 	}
 	printf(" Done\n");
 
+	// set buffersize
 	if (argc < 3 | atoi(argv[2]) == 0) {
-		printf("Initializing buffer with default setting: 256...");
-		buffersize = DEFAULT_BUFFERSIZE;
+		buffer = initBuffer(DEFAULT_BUFFERSIZE);
 	}
 	else {
-		printf("Initializing buffer: %d...", atoi(argv[2]));
-		buffersize = atoi(argv[2]);
+		buffer = initBuffer(atoi(argv[2]));
 	}
-	char** buffer = malloc(buffersize * sizeof(char*));
 	printf(" Done\n");
 
 	if (argc < 4) {
-		printf("Setting backlog numbers with default setting: %d...");
-		backlog = DEFAULT_BACKLOG;
+		setBacklog(&backlog, DEFAULT_BACKLOG);
 	}
 	else {
-		if (atoi(argv[3]) == 0) {
-			perror("Backlog must be greater than 0.");
+		if (setBacklog(&backlog, atoi(argv[2])) == -1)
 			return 0;
-		}
-		printf("Setting backlog numbers: 5...");
-		backlog = atoi(argv[2]);
 	}
 	printf(" Done\n");
 

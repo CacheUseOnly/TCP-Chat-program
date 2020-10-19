@@ -14,8 +14,26 @@ int setPort(int *port, int portNum)
         printf("Can't bind system reserved ports.");
         return -1;
     }
-    printf("Binding port to %d", portNum);
-    port = portNum;
+    printf("Binding port to %d...", portNum);
+    *port = portNum;
 
+    return 0;
+}
+
+char** initBuffer(int buffersize)
+{
+    printf("Initializing buffer %d...", buffersize);
+
+    return malloc(buffersize * sizeof(char*));
+}
+
+int setBacklog(int* backlog, int num)
+{
+    if(num <= 0){
+        printf("Backlog number must greater than 0.");
+        return -1;
+    }
+    printf("Setting backlog numbers %d...", num);
+    *backlog = num;
     return 0;
 }
